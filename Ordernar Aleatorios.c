@@ -7,7 +7,7 @@
 int numerosAleatorios[10];
 
  //Define en que tipo de orden se van a ordenar los numeros
-int queTipoDeOrden = MayorAMenor; //0 = Mayor a menor, 1 = Menor a mayor
+int queTipoDeOrden; //0 = Mayor a menor, 1 = Menor a mayor
 
 int veces, temp;
 int numeroDeNumerosAleatorios = 10;
