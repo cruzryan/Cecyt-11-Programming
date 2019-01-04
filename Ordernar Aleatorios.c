@@ -1,61 +1,64 @@
 #include <stdio.h>
 
+#define MayorAMenor 0
+#define MenorAMayor 1
+
+//Crea variable
 int numerosAleatorios[10];
-int numerosOrdenados[10];
 
-// n = numero de veces para el loop
+ //Define en que tipo de orden se van a ordenar los numeros
+int queTipoDeOrden = MayorAMenor; //0 = Mayor a menor, 1 = Menor a mayor
 
-
-void bubble_sort(int a[], int n) {
-    int i = 0, j = 0, tmp;
-
-    for(i = 0; i < n; i++){
-        for (j = 0; j < n - i - 1; j++) { // last i elements are sorted already            
-            if (a[j] > a[j + 1]) {  // swop if order is broken
-               tmp = a[j];
-               a[j] = a[j + 1];
-               a[j + 1] = tmp;
-           }
-        }
-    }
-}
+int veces, temp;
+int numeroDeNumerosAleatorios = 10;
 
 
 int main(){
 
-    int sorted = 0;
-
-    // Generar 10 numeros aleatorios
+    // Genera 10 numeros aleatorios
     for(int n = 0; n < 10; n++){
         numerosAleatorios[n] = rand() % 100 + 1;
     }
 
-    while(sorted == 0){
-    for(int i = 0; i < 9; i++){
-        
-        sorted = 1;
-        int temp;
-
-        if( numerosAleatorios[i] < numerosAleatorios[i + 1]){
-        
-            temp = numerosAleatorios[i];
-            numerosAleatorios[i] = numerosAleatorios[i + 1]; 
-            numerosAleatorios[i + 1] = temp;
-
-            printf("sorted!!! %d", numerosAleatorios[i]);
-            sorted = 0;
-        
-        } 
-    }    
-
-     if(sorted == 1){
-       for(int x = 0; x < 10; x++ ){
-        printf("%d ", numerosAleatorios[x]);
-       }
+    printf("\nNumeros Aleatorios Generados: \n");
+    for(int x = 0; x < 10; x++){
+        printf("%d, ", numerosAleatorios[x]);
     }
 
-   
+    printf("\nPorfavor elije que tipo de Orden\n\n (0): Menor a mayor \n (1): Mayor a menor \n Orden: ");
+    scanf("%d", &queTipoDeOrden);
+    
+    
+    printf("\n\nTipo de Orden: \n");
+    printf("%d (%s)", queTipoDeOrden, (queTipoDeOrden == 1) ? "Menor a Mayor": "Mayor a Menor");
+
+
+    for (veces=0; veces < numeroDeNumerosAleatorios-1; ++veces) {
+
+        for (int i=0; i < numeroDeNumerosAleatorios - veces - 1; ++i) {
+
+            if ( numerosAleatorios[i] > numerosAleatorios[i+1] ) {
+                temp=numerosAleatorios[i];
+                numerosAleatorios[i]=numerosAleatorios[i+1];
+                numerosAleatorios[i+1]=temp;
+            }
+        }
     }
 
-    return 0;
-} 
+    switch(queTipoDeOrden){
+        case MayorAMenor: 
+        for(int x = 0; x < 10; x++)
+         printf("%d, ", numerosAleatorios[x]);
+
+        break;
+        case MenorAMayor:
+        
+        for(int y = 9; y >= 0; y--){
+            printf("%d, ", numerosAleatorios[y]);
+        }
+        break;
+    }
+
+    
+
+}
